@@ -1,0 +1,21 @@
+{
+  "name": "02-api-testing",
+  "version": "1.0.0",
+  "scripts": {
+    "test:api": "npx playwright test",
+    "test:users": "npx playwright test users-api.spec.js",
+    "test:posts": "npx playwright test posts-api.spec.js",
+    "test:auth": "npx playwright test auth-api.spec.js",
+    "test:negative": "npx playwright test error-handling.spec.js",
+    "test:headed": "npx playwright test --headed",
+    "test:debug": "npx playwright test --debug",
+    "report": "npx playwright show-report",
+    "allure:generate": "npx allure generate ./allure-results --clean",
+    "allure:open": "npx allure open ./allure-report"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.40.0",
+    "allure-playwright": "^2.10.0",
+    "joi": "^17.11.0"
+  }
+}
