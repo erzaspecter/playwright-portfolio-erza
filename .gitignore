@@ -1,0 +1,17 @@
+# Selenium
+**/target/
+**/bin/
+**/test-output/
+**/selenium-projects/**/target/
+**/selenium-projects/**/bin/
+
+# IDE
+**/.idea/
+**/*.iml
+**/.settings/
+**/.classpath
+**/.project
+
+# Logs
+**/logs/
+**/*.log
