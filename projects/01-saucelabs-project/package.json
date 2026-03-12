@@ -1,15 +1,18 @@
 {
-  "name": "playwright-portfolio-erza",
+  "name": "01-saucelabs-project",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {},
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "type": "commonjs",
+  "scripts": {
+    "test": "npx playwright test",
+    "test:bdd": "cucumber-js",
+    "test:bdd:smoke": "cucumber-js --tags @smoke",
+    "test:bdd:regression": "cucumber-js --tags @regression",
+    "test:bdd:dry": "cucumber-js --dry-run",
+    "report": "npx playwright show-report",
+    "report:cucumber": "open reports/cucumber-report.html"
+  },
   "devDependencies": {
-    "@playwright/test": "^1.58.2",
-    "@types/node": "^25.4.0"
+    "@cucumber/cucumber": "^10.0.0",
+    "@playwright/test": "^1.40.0",
+    "playwright": "^1.40.0"
   }
 }

@@ -1,0 +1,14 @@
+{
+  "default": {
+    "require": [
+      "step-definitions/**/*.js"
+    ],
+    "format": [
+      "json:reports/cucumber-report.json",
+      "html:reports/cucumber-report.html",
+      "progress"
+    ],
+    "paths": ["features/"],
+    "publishQuiet": true
+  }
+}
