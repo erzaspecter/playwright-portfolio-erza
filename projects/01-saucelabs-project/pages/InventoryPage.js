@@ -1,7 +1,7 @@
 class InventoryPage {
   constructor(page) {
-    this.page = page
-    this.cartButton = '.shopping_cart_link'
+    this.page = page;
+    this.cartButton = '.shopping_cart_link';
   }
 
   async addItemToCart(itemName) {
@@ -9,8 +9,13 @@ class InventoryPage {
   }
 
   async goToCart() {
-    await this.page.click(this.cartButton)
+    await this.page.click(this.cartButton);
+  }
+
+  async getItemCount() {
+    // hitung jumlah produk di halaman inventory
+    return await this.page.locator('.inventory_item').count();
   }
 }
 
-module.exports = { InventoryPage }
+module.exports = InventoryPage;
