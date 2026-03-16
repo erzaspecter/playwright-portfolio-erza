@@ -24,4 +24,4 @@ class LoginPage {
 }
 
 // ✅ EXPORT yang benar untuk Node.js/Playwright
-module.exports = LoginPage;
+module.exports = { LoginPage }  // tambah kurung kurawal

@@ -18,4 +18,4 @@ class InventoryPage {
   }
 }
 
-module.exports = InventoryPage;
+module.exports = { InventoryPage }  // ✅ tambah kurung kurawal

@@ -1,8 +1,8 @@
 // login.steps.js
 const { Given, When, Then } = require('@cucumber/cucumber');
 const { expect } = require('@playwright/test');
-const LoginPage = require('../pages/LoginPage');
-const InventoryPage = require('../pages/InventoryPage');
+const { LoginPage } = require('../pages/LoginPage');
+const { InventoryPage } = require('../pages/InventoryPage');
 
 Given('I am on the login page', async function () {
   console.log('📍 Navigating to login page...');
