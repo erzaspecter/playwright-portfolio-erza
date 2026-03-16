@@ -4,6 +4,101 @@
     "elements": [
       {
         "description": "",
+        "id": "checkout;complete-purchase-with-valid-data",
+        "keyword": "Scenario",
+        "line": 4,
+        "name": "Complete purchase with valid data",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 472755300
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 5,
+            "name": "I am logged in",
+            "match": {
+              "location": "step-definitions\\checkout.steps.js:3"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1834910299
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 6,
+            "name": "I have added \"Sauce Labs Backpack\" to the cart",
+            "match": {
+              "location": "step-definitions\\checkout.steps.js:10"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 69764799
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 7,
+            "name": "I proceed to checkout and submit info \"John\",\"Doe\",\"12345\"",
+            "match": {
+              "location": "step-definitions\\checkout.steps.js:23"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 366356800
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 8,
+            "name": "I should see the order confirmation",
+            "match": {
+              "location": "step-definitions\\checkout.steps.js:33"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 3840799
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 13410100
+            }
+          }
+        ],
+        "tags": [
+          {
+            "name": "@checkout",
+            "line": 3
+          }
+        ],
+        "type": "scenario"
+      }
+    ],
+    "id": "checkout",
+    "line": 1,
+    "keyword": "Feature",
+    "name": "Checkout",
+    "tags": [],
+    "uri": "features\\checkout.feature"
+  },
+  {
+    "description": "",
+    "elements": [
+      {
+        "description": "",
         "id": "login-functionality;successful-login-with-valid-credentials",
         "keyword": "Scenario",
         "line": 3,
@@ -14,11 +109,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-<<<<<<< HEAD
-              "duration": 606506699
-=======
-              "duration": 225406600
->>>>>>> 75fb757cc9654c79561f4c0570ed57af01b0367c
+              "duration": 438516300
             }
           },
           {
@@ -31,11 +122,7 @@
             },
             "result": {
               "status": "passed",
-<<<<<<< HEAD
-              "duration": 1983619300
-=======
-              "duration": 865651300
->>>>>>> 75fb757cc9654c79561f4c0570ed57af01b0367c
+              "duration": 749049699
             }
           },
           {
@@ -48,11 +135,7 @@
             },
             "result": {
               "status": "passed",
-<<<<<<< HEAD
-              "duration": 316561200
-=======
-              "duration": 160694899
->>>>>>> 75fb757cc9654c79561f4c0570ed57af01b0367c
+              "duration": 171822099
             }
           },
           {
@@ -65,11 +148,7 @@
             },
             "result": {
               "status": "passed",
-<<<<<<< HEAD
-              "duration": 83244900
-=======
-              "duration": 630400
->>>>>>> 75fb757cc9654c79561f4c0570ed57af01b0367c
+              "duration": 594099
             }
           },
           {
@@ -82,11 +161,7 @@
             },
             "result": {
               "status": "passed",
-<<<<<<< HEAD
-              "duration": 139613400
-=======
-              "duration": 18298600
->>>>>>> 75fb757cc9654c79561f4c0570ed57af01b0367c
+              "duration": 12020199
             }
           },
           {
@@ -99,11 +174,7 @@
             },
             "result": {
               "status": "passed",
-<<<<<<< HEAD
-              "duration": 33343999
-=======
-              "duration": 12208500
->>>>>>> 75fb757cc9654c79561f4c0570ed57af01b0367c
+              "duration": 8801400
             }
           },
           {
@@ -111,11 +182,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-<<<<<<< HEAD
-              "duration": 42820999
-=======
-              "duration": 11297500
->>>>>>> 75fb757cc9654c79561f4c0570ed57af01b0367c
+              "duration": 13318600
             }
           }
         ],
