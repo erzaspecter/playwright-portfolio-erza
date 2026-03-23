@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+  <head><title>Mock API Test</title></head>
+  <body>
+    <div id="users"></div>
+    <script>
+      fetch('/api/users')
+        .then(res => res.json())
+        .then(data => {
+          document.getElementById('users').innerText = data.map(u => u.name).join(', ');
+        });
+    </script>
+  </body>
+</html>
