@@ -106,14 +106,15 @@ public class LandingPage extends BasePage {
      * Verifikasi bahwa halaman landing sudah dimuat dengan benar
      */
     public boolean isLandingPageLoaded() {
-        try {
-            waitUtil.waitForPageLoad();
-            return isElementDisplayed(By.cssSelector("nav, .navbar, header")) ||
-                   isElementDisplayed(By.cssSelector(".hero-section, .banner-section"));
-        } catch (Exception e) {
-            return false;
-        }
+    try {
+        waitUtil.waitForPageLoad();
+        return isElementDisplayed(By.cssSelector("nav, .navbar, header")) ||
+               isElementDisplayed(By.cssSelector(".hero-section, .banner-section"));
+    } catch (Exception e) {
+        return false;
     }
+}
+
     
     /**
      * Mendapatkan title utama halaman

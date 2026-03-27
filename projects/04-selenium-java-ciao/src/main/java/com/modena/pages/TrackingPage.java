@@ -8,75 +8,30 @@ import org.openqa.selenium.support.PageFactory;
 
 public class TrackingPage extends BasePage {
     
-    // Locators
-    @FindBy(css = "input[placeholder*='e-mail'], input[type='email']")
-    private WebElement emailInput;
-    
-    @FindBy(css = "input[placeholder*='hp'], input[type='tel']")
-    private WebElement phoneInput;
-    
-    @FindBy(css = "button[type='submit'], button:contains('Lacak')")
-    private WebElement trackButton;
-    
-    @FindBy(css = ".tracking-result, .status-card")
-    private WebElement trackingResult;
-    
-    @FindBy(css = ".error-message, .alert-danger")
-    private WebElement errorMessage;
-    
-    @FindBy(xpath = "//table/tbody/tr")
-    private java.util.List<WebElement> trackingRows;
-    
-    private final By trackingTable = By.cssSelector("table");
+    // Perbaiki selector - gunakan By.xpath untuk text contains
+    private final By trackButton = By.xpath("//button[contains(text(),'Lacak')]");
+    private final By emailInput = By.cssSelector("input[type='email'], input[name='email']");
+    private final By phoneInput = By.cssSelector("input[type='tel'], input[name='phone']");
+    private final By trackingResult = By.cssSelector(".tracking-result, .status-card, .result");
+    private final By errorMessage = By.cssSelector(".error-message, .alert-danger");
     
     public TrackingPage(WebDriver driver) {
         super(driver);
-        PageFactory.initElements(driver, this);
     }
     
     public TrackingPage enterEmail(String email) {
-        waitForElementVisible(By.cssSelector("input[placeholder*='e-mail']"));
-        emailInput.sendKeys(email);
+        waitUtil.sendKeysWhenReady(emailInput, email);
         return this;
     }
     
     public TrackingPage enterPhoneNumber(String phone) {
-        phoneInput.sendKeys(phone);
+        waitUtil.sendKeysWhenReady(phoneInput, phone);
         return this;
     }
     
     public TrackingPage clickTrack() {
-        trackButton.click();
-        waitForPageLoad();
+        waitUtil.clickWhenReady(trackButton);
         return this;
-    }
-    
-    public String getTrackingResult() {
-        waitForElementVisible(By.cssSelector(".tracking-result"));
-        return trackingResult.getText();
-    }
-    
-    public boolean isTrackingResultDisplayed() {
-        try {
-            return trackingResult.isDisplayed();
-        } catch (Exception e) {
-            return false;
-        }
-    }
-    
-    public String getErrorMessage() {
-        waitForElementVisible(By.cssSelector(".error-message"));
-        return errorMessage.getText();
-    }
-    
-    public int getTrackingEntriesCount() {
-        waitForElementVisible(trackingTable);
-        return trackingRows.size();
-    }
-    
-    public void clearInputs() {
-        emailInput.clear();
-        phoneInput.clear();
     }
     
     public TrackingPage trackByEmail(String email) {
@@ -85,5 +40,21 @@ public class TrackingPage extends BasePage {
     
     public TrackingPage trackByPhone(String phone) {
         return enterPhoneNumber(phone).clickTrack();
+    }
+    
+    public boolean isTrackingResultDisplayed() {
+        return waitUtil.isElementDisplayedWithWait(trackingResult);
+    }
+    
+    public String getTrackingResult() {
+        return waitUtil.getTextWhenReady(trackingResult);
+    }
+    
+    public String getErrorMessage() {
+        return waitUtil.getTextWhenReady(errorMessage);
+    }
+    
+    public int getTrackingEntriesCount() {
+        return driver.findElements(By.cssSelector("table tbody tr")).size();
     }
 }

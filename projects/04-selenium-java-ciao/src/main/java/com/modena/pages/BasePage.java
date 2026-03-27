@@ -14,11 +14,13 @@ public class BasePage {
     protected WebDriverWait wait;
     protected Actions actions;
     protected JavascriptExecutor js;
+    protected WaitUtil waitUtil;
     
     public BasePage(WebDriver driver) {
         this.driver = driver;
         this.wait = new WebDriverWait(driver, Duration.ofSeconds(15));
         this.actions = new Actions(driver);
+        this.waitUtil = new WaitUtil(driver);
         this.js = (JavascriptExecutor) driver;
         PageFactory.initElements(driver, this);
     }

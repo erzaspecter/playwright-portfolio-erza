@@ -2,71 +2,57 @@ package com.modena.utils;
 
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.Properties;
 
-/**
- * Utility class untuk membaca konfigurasi dari file properties
- * Mendukung multiple environment (dev, staging, production)
- */
 public class ConfigReader {
     
-    private Properties properties;
     private static ConfigReader instance;
-    private String environment;
+    private Properties properties;
     
-    /**
-     * Private constructor untuk Singleton pattern
-     */
     private ConfigReader() {
         properties = new Properties();
         loadProperties();
     }
     
-    /**
-     * Mendapatkan instance ConfigReader (Singleton)
-     */
     public static ConfigReader getInstance() {
         if (instance == null) {
-            instance = new ConfigReader();
+            synchronized (ConfigReader.class) {
+                if (instance == null) {
+                    instance = new ConfigReader();
+                }
+            }
         }
         return instance;
     }
     
-    /**
-     * Memuat semua file properties
-     */
     private void loadProperties() {
-        // Baca environment dari system property atau default
-        environment = System.getProperty("env", "config");
+        // Coba load dari beberapa lokasi
+        String[] configPaths = {
+            "config/config.properties",
+            "src/main/resources/config.properties",
+            "src/test/resources/config.properties"
+        };
         
-        try {
-            // Load main config file
-            String configFile = String.format("config/%s.properties", environment);
-            InputStream input = getClass().getClassLoader().getResourceAsStream(configFile);
-            
-            if (input == null) {
-                // Fallback ke file di folder config
-                input = new FileInputStream(configFile);
+        boolean loaded = false;
+        for (String path : configPaths) {
+            try (FileInputStream fis = new FileInputStream(path)) {
+                properties.load(fis);
+                System.out.println("Config loaded from: " + path);
+                loaded = true;
+                break;
+            } catch (IOException e) {
+                // Continue to next path
             }
-            
-            properties.load(input);
-            input.close();
-            
-            System.out.println("Loaded configuration from: " + configFile);
-            
-        } catch (IOException e) {
-            System.err.println("Failed to load configuration file: " + e.getMessage());
-            // Load default properties jika file tidak ditemukan
-            loadDefaultProperties();
+        }
+        
+        if (!loaded) {
+            System.out.println("Config file not found, using defaults");
+            setDefaultProperties();
         }
     }
     
-    /**
-     * Load default properties jika file tidak ditemukan
-     */
-    private void loadDefaultProperties() {
-        properties.setProperty("base.url", "https://ciao.modena.com/id");
+    private void setDefaultProperties() {
+        properties.setProperty("base.url", "https://the-internet.herokuapp.com/login");
         properties.setProperty("default.browser", "chrome");
         properties.setProperty("implicit.wait", "10");
         properties.setProperty("explicit.wait", "15");
@@ -74,85 +60,49 @@ public class ConfigReader {
         properties.setProperty("report.path", "reports/extent-reports/");
     }
     
-    /**
-     * Mendapatkan value berdasarkan key
-     */
+    // Method getProperty dengan 1 parameter
     public String getProperty(String key) {
-        String value = properties.getProperty(key);
-        if (value == null) {
-            System.err.println("Property not found: " + key);
-            return "";
-        }
-        return value;
+        return properties.getProperty(key);
     }
     
-    /**
-     * Mendapatkan value dengan default jika key tidak ditemukan
-     */
+    // Method getProperty dengan default value (overload)
     public String getProperty(String key, String defaultValue) {
         return properties.getProperty(key, defaultValue);
     }
     
-    /**
-     * Mendapatkan integer value
-     */
-    public int getIntProperty(String key) {
-        String value = getProperty(key);
-        try {
-            return Integer.parseInt(value);
-        } catch (NumberFormatException e) {
-            System.err.println("Failed to parse int for key: " + key);
-            return 0;
-        }
-    }
-    
-    /**
-     * Mendapatkan boolean value
-     */
-    public boolean getBooleanProperty(String key) {
-        String value = getProperty(key);
-        return Boolean.parseBoolean(value);
-    }
-    
-    /**
-     * Mendapatkan base URL
-     */
     public String getBaseUrl() {
-        return getProperty("base.url");
+        return getProperty("base.url", "https://the-internet.herokuapp.com/login");
     }
     
-    /**
-     * Mendapatkan browser default
-     */
     public String getDefaultBrowser() {
         return getProperty("default.browser", "chrome");
     }
     
-    /**
-     * Mendapatkan implicit wait timeout
-     */
     public int getImplicitWait() {
-        return getIntProperty("implicit.wait");
+        String value = getProperty("implicit.wait", "10");
+        try {
+            return Integer.parseInt(value);
+        } catch (NumberFormatException e) {
+            return 10;
+        }
     }
     
-    /**
-     * Mendapatkan explicit wait timeout
-     */
     public int getExplicitWait() {
-        return getIntProperty("explicit.wait");
+        String value = getProperty("explicit.wait", "15");
+        try {
+            return Integer.parseInt(value);
+        } catch (NumberFormatException e) {
+            return 15;
+        }
     }
     
-    /**
-     * Mendapatkan path untuk screenshot
-     */
+    // ✅ Tambahkan method getScreenshotPath
     public String getScreenshotPath() {
         return getProperty("screenshot.path", "reports/screenshots/");
     }
     
-    /**
-     * Reload configuration (useful setelah environment change)
-     */
-    public void reload() {
-        loadProperties();
+    // ✅ Tambahkan method getReportPath
+    public String getReportPath() {
+        return getProperty("report.path", "reports/extent-reports/");
     }
 }

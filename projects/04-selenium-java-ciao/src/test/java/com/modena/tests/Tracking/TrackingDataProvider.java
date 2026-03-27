@@ -1,4 +1,4 @@
-package com.modena.tests.Tracking;
+package com.modena.tests.tracking;
 
 import com.modena.utils.ExcelDataProvider;
 import org.testng.annotations.DataProvider;
