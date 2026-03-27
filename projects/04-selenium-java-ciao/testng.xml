@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="CIAO Modena Test Suite" parallel="tests" thread-count="3">
+    
+    <listeners>
+        <listener class-name="com.modena.listeners.ExtentReportListener"/>
+        <listener class-name="com.modena.listeners.TestListener"/>
+    </listeners>
+    
+    <test name="Chrome - Tracking Tests">
+        <parameter name="browser" value="chrome"/>
+        <classes>
+            <class name="com.modena.tests.tracking.TrackingTests"/>
+        </classes>
+    </test>
+    
+    <test name="Firefox - Tracking Tests">
+        <parameter name="browser" value="firefox"/>
+        <classes>
+            <class name="com.modena.tests.tracking.TrackingTests"/>
+        </classes>
+    </test>
+    
+    <test name="Smoke Tests">
+        <parameter name="browser" value="chrome"/>
+        <packages>
+            <package name="com.modena.tests.smoke.*"/>
+        </packages>
+    </test>
+    
+    <test name="Regression Suite">
+        <parameter name="browser" value="headless"/>
+        <packages>
+            <package name="com.modena.tests.regression.*"/>
+            <package name="com.modena.tests.tracking.*"/>
+            <package name="com.modena.tests.registration.*"/>
+        </packages>
+    </test>
+    
+</suite>

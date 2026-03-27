@@ -20,11 +20,11 @@ public class BaseTest {
         driver.get("https://the-internet.herokuapp.com/login");
     }
 
-    @AfterMethod
-    public void tearDown() {
-        // Tutup browser setelah selesai setiap test
-        if (driver != null) {
-            driver.quit();
-        }
-    }
+    // @AfterMethod
+    // public void tearDown() {
+    //     // Tutup browser setelah selesai setiap test
+    //     if (driver != null) {
+    //         driver.quit();
+    //     }
+    // }
 }
