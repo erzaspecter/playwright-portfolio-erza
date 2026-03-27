@@ -1,4 +1,4 @@
-package com.modena.energy.tests.calculator;
+﻿package com.modena.energy.tests.calculator;
 
 import com.modena.energy.base.BaseTest;
 import org.testng.Assert;
