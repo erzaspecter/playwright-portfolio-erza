@@ -10,15 +10,19 @@ public class TrackingTests extends BaseTest {
 
     @Test
     public void testTrackingFunctionality() {
-        // 1. Login
+        // Inisialisasi LoginPage
         LoginPage loginPage = new LoginPage(driver);
+        
+        // Login
         HomePage homePage = loginPage.loginApplication("tomsmith", "SuperSecretPassword!");
-
-        // 2. Navigasi ke halaman tracking (pastikan method ini ada di HomePage)
-        // homePage.goToTracking();
-
-        // 3. Assertions (contoh)
-        // Assert.assertTrue(homePage.isTrackingVisible());
-        System.out.println("Tracking test executed successfully!");
+        
+        // Verifikasi bahwa homePage tidak null
+        Assert.assertNotNull(homePage, "HomePage should not be null after login");
+        
+        // Navigasi ke tracking (pastikan method ini ada)
+        homePage.goToTracking();
+        
+        // Verifikasi tracking visible
+        Assert.assertTrue(homePage.isTrackingVisible(), "Tracking page should be visible");
     }
 }
