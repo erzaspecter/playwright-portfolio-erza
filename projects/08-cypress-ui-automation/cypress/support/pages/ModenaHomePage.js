@@ -18,7 +18,7 @@ export default class ModenaHomePage {
       timeout: 60000,
       failOnStatusCode: false
     });
-    cy.wait(3000); // atau tunggu elemen penting
+    cy.wait(500); // atau tunggu elemen penting
   }
 
   getLogo() {
